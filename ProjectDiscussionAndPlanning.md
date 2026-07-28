@@ -6,6 +6,7 @@ Netflix Movies and Shows Popularity Data Analysis
 ## Group Members
 - Jaehan Kim
 - Akshita Mylavarapu
+- Taliah Blom
 
 ## Project Goal
 Our goal is to analyze Netflix movies and TV shows using real data. We want to compare movies and TV shows, find popular titles, and see how likes, views, and ratings are related to popularity.
@@ -33,7 +34,12 @@ We will divide the project into clear parts so everyone knows what they are resp
 - Help create presentation slides
 - Help explain the results
 
-### Both Members
+### Taliah Blom
+- Data cleaning
+- Help create presentation slides
+- Help write Pandas code
+
+### All Members
 - Check the code
 - Discuss results
 - Practice the final presentation
@@ -44,25 +50,25 @@ We will divide the project into clear parts so everyone knows what they are resp
 Choose the final Netflix dataset and download it.
 
 Deadline: End of this week  
-Group members: Jaehan and Akshita
+Group members: Jaehan and Akshita and Taliah
 
 ### Goal 2
 Clean the data and decide which variables to use, such as likes, views, ratings, movies, and TV shows.
 
 Deadline: Next week  
-Group members: Jaehan and Akshita
+Group members: Jaehan and Akshita and Taliah
 
 ### Goal 3
 Create first visualizations comparing Netflix movies and TV shows.
 
 Deadline: Before the progress update presentation  
-Group members: Jaehan and Akshita
+Group members: Jaehan and Akshita and Taliah
 
 ### Goal 4
 Write the main conclusions and prepare presentation slides.
 
 Deadline: Before the final presentation week  
-Group members: Jaehan and Akshita
+Group members: Jaehan and Akshita and Taliah
 
 ## First Group Meeting
 
