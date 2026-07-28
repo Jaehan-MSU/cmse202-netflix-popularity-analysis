@@ -4,6 +4,7 @@
 Group members:
 - Jaehan Kim
 - Akshita Mylavarapu
+- Taliah Blom
 
 Project topic:
 Our project analyzes Netflix movies and TV shows based on popularity, likes, views, and ratings.
