@@ -1,11 +1,16 @@
-# cmse202-netflix-popularity-analysis
-# Netflix Movies and Shows Popularity Data Analysis
+# Netflix Content Popularity Analysis
 
-Group members:
+## How to Run
+1. Clone the repository
+2. Install requirements: pandas, numpy, matplotlib, seaborn, scikit-learn
+3. Run the notebook in order
+
+## Data
+- Source: [Kaggle Netflix dataset](https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies)
+- Files: titles.csv, credits.csv
+
+## Group Members
 - Jaehan Kim
 - Akshita Mylavarapu
 - Taliah Blom
 - Ahmed Chishti
-
-Project topic:
-Our project analyzes Netflix movies and TV shows based on popularity, likes, views, and ratings.
