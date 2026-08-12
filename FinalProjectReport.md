@@ -1,0 +1,99 @@
+# Netflix Content Popularity: Can Content Features Predict What Becomes Popular?
+
+**CMSE 202 Final Project Report**
+
+**Group Members**: Jaehan Kim, Akshita Mylavarapu, Taliah Blom, Ahmed Chishti
+
+**GitHub Repository**: https://github.com/Jaehan-MSU/cmse202-netflix-popularity-analysis.git
+
+---
+
+## Introduction and Research Question
+
+Netflix is a dominant global entertainment platform, making content popularity a key interest for creators and strategists. However, popularity is complex and multifaceted.
+In this project, we set out to answer the following research question: **Can Netflix content features such as release year, rating, duration, genre, country, content type, and cast/director characteristics help explain or predict popularity?** We used four metrics (IMDb score, IMDb votes, TMDB popularity, and TMDB score) to capture both critical reception and audience engagement.
+
+## Methods and Computational Techniques
+
+### Data Acquisition and Cleaning
+
+We used the [Netflix TV Shows and Movies dataset from Kaggle](https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies), consisting of two files: `titles.csv` (containing content metadata) and `credits.csv` (containing information on actors and directors). The titles dataset contained information on 5,131 unique titles, including movies (3,271) and TV shows (1,860).
+
+We cleaned the data by selecting relevant columns, removing duplicates, converting numeric types, and handling missing values.
+
+### Feature Engineering
+
+We engineered several features to capture talent influence:
+
+1. **Aggregations**: Created `num_actors` and `num_directors` columns.
+2. **Leave-One-Out Averages**: Computed average IMDb score, TMDB score, and TMDB popularity for actors/directors across all other titles they worked on, avoiding target leakage.
+3. **Encoding**: One-hot encoded `genres` and `production_countries`, retaining only the top 50 countries.
+
+### Modeling Approach
+
+We built regression and classification models using `scikit-learn`:
+
+- **Regression**: Linear Regression (LR) and Support Vector Regression (SVR), on both original and log-transformed targets.
+- **Classification**: Support Vector Classification (SVC) and a Perceptron classifier, predicting top-quartile popularity. Features were standardized with `StandardScaler`.
+
+Libraries used: Pandas, NumPy, Matplotlib, Seaborn, and scikit-learn.
+
+## Results
+
+### Exploratory Data Analysis
+
+Our EDA revealed several interesting patterns:
+
+- IMDb and TMDB scores are strongly correlated (r=0.69), suggesting they capture similar aspects of content quality.
+- TV shows tend to have higher average ratings than movies (IMDb: ~6.70 vs ~6.45; TMDB: ~6.96 vs ~6.75), but movies receive significantly more IMDb votes on average (~32,000 vs ~11,000).
+- IMDb votes and TMDB popularity are heavily right-skewed, with a small number of titles driving the mean upward.
+- Release year and runtime showed very weak correlations with all popularity metrics, suggesting they are not strong predictors on their own.
+
+### Modeling Results
+
+| Metric                      | IMDb Score | IMDb Votes | TMDB Popularity | TMDB Score |
+| --------------------------- | ---------- | ---------- | --------------- | ---------- |
+| LR R²<br>(original)         | 0.290      | 0.246      | 0.028           | 0.264      |
+| LR R²<br>(log-transformed)  | 0.275      | 0.256      | 0.021           | 0.252      |
+| SVR R²<br>(original)        | 0.308      | -0.047     | -0.012          | 0.294      |
+| SVR R²<br>(log-transformed) | 0.298      | 0.214      | 0.017           | 0.247      |
+| SVC Accuracy                | 74.0%      | 83.0%      | 79.9%           | 75.6%      |
+| Perceptron Accuracy         | 63.0%      | 78.6%      | 74.2%           | 62.0%      |
+
+**Table 1: Model Performance**
+
+Regression models achieved R² values below 0.31 for all targets, indicating content features alone explain little variance in popularity. SVR performed slightly better for score-based metrics.
+
+Classification models achieved higher accuracy, but confusion matrices revealed models had difficulty identifying truly popular titles (low recall) while being good at identifying non-popular titles (high true negatives).
+
+### Feature Importance
+
+For TMDB popularity, important features included: `runtime` (positive), `is_movie` (negative), `num_actors` (positive), `country_US` (positive), and `avg_actor_tmdb` (positive). Indian content and reality genres showed negative associations.
+
+### Discussion
+
+Our results suggest Netflix content popularity is difficult to predict using only content metadata and basic cast/director features. The weak predictive performance indicates popularity is influenced by many factors not captured in our dataset, which might include things like:
+
+- Marketing spend and promotional campaigns
+- Release timing and cultural context
+- Cast and director star power beyond historical averages
+- Netflix's internal recommendation algorithms
+- Viewer word-of-mouth and social media engagement
+
+The leave-one-out averages for actors and directors showed some predictive signal, but not enough to substantially improve model performance. This suggests while creative talent matters, their influence on popularity may be mediated by other factors.
+
+### Challenges and Limitations
+
+We encountered several challenges:
+
+- High skew in TMDB popularity was difficult to model even after log-transformation.
+- One-hot encoding created high-dimensional sparse features.
+- The dataset lacks crucial information on marketing and promotional strategies.
+
+## Conclusion
+
+Our analysis shows while content features provide some insight into Netflix popularity, they are insufficient for accurate prediction. The best-performing models achieved only moderate accuracy and low R² values, confirming popularity is a complex phenomenon influenced by many external factors.
+
+Future work should incorporate marketing, release strategy, and social media engagement, and potentially explore non-linear models.
+
+Despite these limitations, our project demonstrates a systematic approach to data-driven analysis, leveraging multiple computational tools and modeling techniques to investigate a real-world question.
