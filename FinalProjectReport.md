@@ -17,7 +17,7 @@ In this project, we set out to answer the following research question: **Can Net
 
 ### Data Acquisition and Cleaning
 
-We used the [Netflix TV Shows and Movies dataset from Kaggle](https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies), consisting of two files: `titles.csv` (containing content metadata) and `credits.csv` (containing information on actors and directors). The titles dataset contained information on 5,131 unique titles, including movies (3,271) and TV shows (1,860).
+We used the [Netflix TV Shows and Movies dataset from Kaggle](https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies), consisting of two files: `titles.csv` (containing content metadata) and `credits.csv` (containing information on actors and directors). After cleaning, our dataset contained 5,131 unqiue titles, including 3,271 movies and 1,860 TV shows.
 
 We cleaned the data by selecting relevant columns, removing duplicates, converting numeric types, and handling missing values.
 
@@ -62,13 +62,13 @@ Our EDA revealed several interesting patterns:
 
 **Table 1: Model Performance**
 
-Regression models achieved R² values below 0.31 for all targets, indicating content features alone explain little variance in popularity. SVR performed slightly better for score-based metrics.
+Regression models achieved R² values below 0.31 for all targets, indicating our selected features explained only a limited amount of variation in the popularity metrics.
 
 Classification models achieved higher accuracy, but confusion matrices revealed models had difficulty identifying truly popular titles (low recall) while being good at identifying non-popular titles (high true negatives).
 
 ### Feature Importance
 
-For TMDB popularity, important features included: `runtime` (positive), `is_movie` (negative), `num_actors` (positive), `country_US` (positive), and `avg_actor_tmdb` (positive). Indian content and reality genres showed negative associations.
+For TMDB popularity, important features included: `runtime` (positive), `is_movie` (negative), `num_actors` (positive), `country_US` (positive), and `avg_actor_tmdb` (positive). In linear model, `country_IN` and reality genres had negative coefficients, meaning they were associated with lower predicted TMDB popularity within this dataset and model.
 
 ### Discussion
 
@@ -92,8 +92,8 @@ We encountered several challenges:
 
 ## Conclusion
 
-Our analysis shows while content features provide some insight into Netflix popularity, they are insufficient for accurate prediction. The best-performing models achieved only moderate accuracy and low R² values, confirming popularity is a complex phenomenon influenced by many external factors.
+Overall, our results show that Netflix popularity is difficult to predict using only content metadata and basic cast/director features. Some features were useful for explaining patterns in the data. For example, IMDb score and TMDB score were strongly related, IMDb votes and TMDB popularity were moderately related, and content type showed differences between movies and TV shows. TV shows had higher average ratings, while movies received more IMDb votes.
 
-Future work should incorporate marketing, release strategy, and social media engagement, and potentially explore non-linear models.
+However, the modeling results showed that these features were not strong enough for accurate prediction. Regression models had low R² values, meaning they explained only a limited amount of variation in popularity metrics. Classification models achieved moderate accuracy, but they still struggled to identify truly popular titles. This suggests that popularity depends on many outside factors not included in the dataset, such as marketing, release timing, recommendation algorithms, social media attention, and audience trends.
 
-Despite these limitations, our project demonstrates a systematic approach to data-driven analysis, leveraging multiple computational tools and modeling techniques to investigate a real-world question.
+In conclusion, content features can help explain some popularity patterns, but they cannot fully predict what becomes popular on Netflix. Future work could improve the analysis by including marketing data, release strategy, social media engagement, and separate models for movies and TV shows.
