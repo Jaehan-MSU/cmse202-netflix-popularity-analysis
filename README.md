@@ -34,7 +34,7 @@ pip install pandas numpy matplotlib seaborn scikit-learn
 
 | Member | Contribution |
 | -- | -- | 
-| Jaehan Kim | -- |
-| Akshita Mylavarapu | -- | 
-| Taliah Blom | -- |
-| Ahmed Chishti | -- |
+| Jaehan Kim | Data collecting, dataset cleaning, arranging timeline and structure for the project |
+| Akshita Mylavarapu | Data collecting, model analysis, presentation and slides | 
+| Taliah Blom | Modeling pipeline, dataset merging, report writing, graph creation |
+| Ahmed Chishti | Problem solving, cross-referencing, final review |
