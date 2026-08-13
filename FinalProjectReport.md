@@ -18,11 +18,11 @@ Netflix popularity reflects both audience engagement and critical reception, mak
 
 We used the [Netflix TV Shows and Movies dataset from Kaggle](https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies), consisting of two files: `titles.csv` (content metadata) and `credits.csv` (information on actors and directors). After cleaning, our dataset contained 5,131 unique titles (3,271 movies and 1,860 TV shows).
 
-We cleaned the data by selecting relevant columns, removing duplicates, converting numeric types, and handling missing values.
+We selected relevant columns, removed duplicates, converted numeric types, and handled missing values.
 
 ### Feature Engineering
 
-We engineered several features to capture talent influence:
+Talent-related features:
 
 1. **Aggregations**: Created `num_actors` and `num_directors` columns.
 2. **Leave-One-Out Averages**: Computed average IMDb score, TMDB score, and TMDB popularity for actors/directors across all other titles they worked on, avoiding target leakage.
@@ -41,7 +41,7 @@ Libraries used: Pandas, NumPy, Matplotlib, Seaborn, and scikit-learn.
 
 ### Exploratory Data Analysis
 
-Our EDA revealed several interesting patterns:
+Our EDA revealed several patterns:
 
 - IMDb and TMDB scores are strongly correlated (r=0.69), suggesting they capture similar aspects.
 - TV shows have higher average ratings than movies (IMDb: ~6.70 vs ~6.45; TMDB: ~6.96 vs ~6.75).
@@ -73,19 +73,19 @@ For TMDB popularity, important features included: `runtime` (positive), `is_movi
 
 ### Discussion
 
-Our results suggest Netflix content popularity is difficult to predict using only content metadata and basic cast/director features. Popularity is influenced by many factors not captured in our dataset, which might include things like:
+Our results suggest Netflix content popularity is difficult to predict using only content metadata and basic cast/director features. Popularity is influenced by factors not captured in our dataset, including:
 
-- Marketing spend and promotional campaigns
+- Marketing spend
 - Release timing and cultural context
 - Cast and director star power beyond historical averages
-- Netflix's internal recommendation algorithms
+- Netflix's recommendation algorithms
 - Viewer word-of-mouth and social media engagement
 
 The leave-one-out averages for actors and directors showed some predictive signal, but not enough to substantially improve model performance. This suggests while creative talent matters, their influence on popularity may be mediated by other factors.
 
 ### Challenges and Limitations
 
-We encountered several challenges:
+Key challenges:
 
 - High skew in TMDB popularity was difficult to model even after log-transformation.
 - One-hot encoding created high-dimensional features.
@@ -93,7 +93,7 @@ We encountered several challenges:
 
 ## Conclusion
 
-Overall, our results show Netflix popularity is difficult to predict using only content metadata and basic cast/director features. Some features were useful for explaining patterns in the data. For example, **IMDb score** and **TMDB score** were strongly related, **IMDb votes** and **TMDB popularity** were moderately related, and content type showed differences between movies and TV shows. TV shows had higher average ratings, while movies received more IMDb votes.
+Overall, our results show Netflix popularity is difficult to predict using only content metadata and basic cast/director features. Some features helped explain patterns. For example, **IMDb score** and **TMDB score** were strongly related, **IMDb votes** and **TMDB popularity** were moderately related, and content type showed differences between movies and TV shows. TV shows had higher average ratings, while movies received more IMDb votes.
 
 However, the modeling results showed these features were not strong enough for accurate prediction. Regression models had low R² values, meaning they explained only limited variation in popularity metrics. Classification models achieved moderate accuracy, but still struggled to identify truly popular titles. This suggests popularity depends on many outside factors not included in the dataset.
 
