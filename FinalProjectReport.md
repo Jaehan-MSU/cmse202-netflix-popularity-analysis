@@ -11,13 +11,13 @@
 ## Introduction and Research Question
 
 Netflix is a dominant global entertainment platform, making content popularity a key interest for creators and strategists. However, popularity is complex and multifaceted.
-In this project, we set out to answer the following research question: **Can Netflix content features such as release year, rating, duration, genre, country, content type, and cast/director characteristics help explain or predict popularity?** We used four metrics (IMDb score, IMDb votes, TMDB popularity, and TMDB score) to capture both critical reception and audience engagement.
+In this project, we answer the following research question: **Can Netflix content features such as release year, rating, duration, genre, country, content type, and cast/director characteristics help explain or predict popularity?** We used four metrics (IMDb score, IMDb votes, TMDB popularity, and TMDB score) to capture both critical reception and audience engagement.
 
 ## Methods and Computational Techniques
 
 ### Data Acquisition and Cleaning
 
-We used the [Netflix TV Shows and Movies dataset from Kaggle](https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies), consisting of two files: `titles.csv` (containing content metadata) and `credits.csv` (containing information on actors and directors). After cleaning, our dataset contained 5,131 unqiue titles, including 3,271 movies and 1,860 TV shows.
+We used the [Netflix TV Shows and Movies dataset from Kaggle](https://www.kaggle.com/datasets/victorsoeiro/netflix-tv-shows-and-movies), consisting of two files: `titles.csv` (content metadata) and `credits.csv` (information on actors and directors). After cleaning, our dataset contained 5,131 unique titles (3,271 movies and 1,860 TV shows).
 
 We cleaned the data by selecting relevant columns, removing duplicates, converting numeric types, and handling missing values.
 
@@ -34,7 +34,7 @@ We engineered several features to capture talent influence:
 We built regression and classification models using `scikit-learn`:
 
 - **Regression**: Linear Regression (LR) and Support Vector Regression (SVR), on both original and log-transformed targets.
-- **Classification**: Support Vector Classification (SVC) and a Perceptron classifier, predicting top-quartile popularity. Features were standardized with `StandardScaler`.
+- **Classification**: Support Vector Classification (SVC) and Perceptron classifier, predicting top-quartile popularity. Features were standardized with `StandardScaler`.
 
 Libraries used: Pandas, NumPy, Matplotlib, Seaborn, and scikit-learn.
 
@@ -44,10 +44,11 @@ Libraries used: Pandas, NumPy, Matplotlib, Seaborn, and scikit-learn.
 
 Our EDA revealed several interesting patterns:
 
-- IMDb and TMDB scores are strongly correlated (r=0.69), suggesting they capture similar aspects of content quality.
-- TV shows tend to have higher average ratings than movies (IMDb: ~6.70 vs ~6.45; TMDB: ~6.96 vs ~6.75), but movies receive significantly more IMDb votes on average (~32,000 vs ~11,000).
+- IMDb and TMDB scores are strongly correlated (r=0.69), suggesting they capture similar aspects.
+- TV shows tend to have higher average ratings than movies (IMDb: ~6.70 vs ~6.45; TMDB: ~6.96 vs ~6.75).
+- Movies receive significantly more IMDb votes on average (~32,000 vs ~11,000).
 - IMDb votes and TMDB popularity are heavily right-skewed, with a small number of titles driving the mean upward.
-- Release year and runtime showed very weak correlations with all popularity metrics, suggesting they are not strong predictors on their own.
+- Release year/runtime show very weak correlations with all popularity metrics, suggesting they are not strong predictors on their own.
 
 ### Modeling Results
 
@@ -62,17 +63,17 @@ Our EDA revealed several interesting patterns:
 
 **Table 1: Model Performance**
 
-Regression models achieved R² values below 0.31 for all targets, indicating our selected features explained only a limited amount of variation in the popularity metrics.
+Regression models achieved R² values below 0.31 for all targets, indicating selected features explained only limited variation in the popularity metrics.
 
-Classification models achieved higher accuracy, but confusion matrices revealed models had difficulty identifying truly popular titles (low recall) while being good at identifying non-popular titles (high true negatives).
+Classification models achieved higher accuracy. Confusion matrices revealed models had difficulty identifying truly popular titles (low recall) while being good at identifying non-popular titles (high true negatives).
 
 ### Feature Importance
 
-For TMDB popularity, important features included: `runtime` (positive), `is_movie` (negative), `num_actors` (positive), `country_US` (positive), and `avg_actor_tmdb` (positive). In linear model, `country_IN` and reality genres had negative coefficients, meaning they were associated with lower predicted TMDB popularity within this dataset and model.
+For TMDB popularity, important features included: `runtime` (positive), `is_movie` (negative), `num_actors` (positive), `country_US` (positive), and `avg_actor_tmdb` (positive), `country_IN` (negative), and `genre_reality` (negative).
 
 ### Discussion
 
-Our results suggest Netflix content popularity is difficult to predict using only content metadata and basic cast/director features. The weak predictive performance indicates popularity is influenced by many factors not captured in our dataset, which might include things like:
+Our results suggest Netflix content popularity is difficult to predict using only content metadata and basic cast/director features. Popularity is influenced by many factors not captured in our dataset, which might include things like:
 
 - Marketing spend and promotional campaigns
 - Release timing and cultural context
@@ -87,13 +88,13 @@ The leave-one-out averages for actors and directors showed some predictive signa
 We encountered several challenges:
 
 - High skew in TMDB popularity was difficult to model even after log-transformation.
-- One-hot encoding created high-dimensional sparse features.
+- One-hot encoding created high-dimensional features.
 - The dataset lacks crucial information on marketing and promotional strategies.
 
 ## Conclusion
 
-Overall, our results show that Netflix popularity is difficult to predict using only content metadata and basic cast/director features. Some features were useful for explaining patterns in the data. For example, IMDb score and TMDB score were strongly related, IMDb votes and TMDB popularity were moderately related, and content type showed differences between movies and TV shows. TV shows had higher average ratings, while movies received more IMDb votes.
+Overall, our results show Netflix popularity is difficult to predict using only content metadata and basic cast/director features. Some features were useful for explaining patterns in the data. For example, **IMDb score** and **TMDB score** were strongly related, **IMDb votes** and **TMDB popularity** were moderately related, and content type showed differences between movies and TV shows. TV shows had higher average ratings, while movies received more IMDb votes.
 
-However, the modeling results showed that these features were not strong enough for accurate prediction. Regression models had low R² values, meaning they explained only a limited amount of variation in popularity metrics. Classification models achieved moderate accuracy, but they still struggled to identify truly popular titles. This suggests that popularity depends on many outside factors not included in the dataset, such as marketing, release timing, recommendation algorithms, social media attention, and audience trends.
+However, the modeling results showed these features were not strong enough for accurate prediction. Regression models had low R² values, meaning they explained only limited variation in popularity metrics. Classification models achieved moderate accuracy, but still struggled to identify truly popular titles. This suggests popularity depends on many outside factors not included in the dataset.
 
-In conclusion, content features can help explain some popularity patterns, but they cannot fully predict what becomes popular on Netflix. Future work could improve the analysis by including marketing data, release strategy, social media engagement, and separate models for movies and TV shows.
+In conclusion, content features can help explain some popularity patterns, but they cannot fully predict what becomes popular on Netflix. Future work could improve the analysis by including marketing data, release strategies, internal algorithms, social media attention, and audience trends.
