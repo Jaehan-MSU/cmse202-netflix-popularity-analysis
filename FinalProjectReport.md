@@ -1,4 +1,4 @@
-# Netflix Content Popularity: Can Content Features Predict What Becomes Popular?
+# Netflix Content Popularity
 
 **CMSE 202 Final Project Report**
 
@@ -10,8 +10,7 @@
 
 ## Introduction and Research Question
 
-Netflix is a dominant global entertainment platform, making content popularity a key interest for creators and strategists. However, popularity is complex and multifaceted.
-In this project, we answer the following research question: **Can Netflix content features such as release year, rating, duration, genre, country, content type, and cast/director characteristics help explain or predict popularity?** We used four metrics (IMDb score, IMDb votes, TMDB popularity, and TMDB score) to capture both critical reception and audience engagement.
+Netflix popularity reflects both audience engagement and critical reception, making it complex to explain. In this project, we answer the following question: **Can Netflix content features such as release year, rating, duration, genre, country, content type, and cast/director characteristics help explain or predict popularity?** We used IMDb score, IMDb votes, TMDB popularity, and TMDB score as popularity-related metrics.
 
 ## Methods and Computational Techniques
 
@@ -45,10 +44,11 @@ Libraries used: Pandas, NumPy, Matplotlib, Seaborn, and scikit-learn.
 Our EDA revealed several interesting patterns:
 
 - IMDb and TMDB scores are strongly correlated (r=0.69), suggesting they capture similar aspects.
-- TV shows tend to have higher average ratings than movies (IMDb: ~6.70 vs ~6.45; TMDB: ~6.96 vs ~6.75).
-- Movies receive significantly more IMDb votes on average (~32,000 vs ~11,000).
-- IMDb votes and TMDB popularity are heavily right-skewed, with a small number of titles driving the mean upward.
-- Release year/runtime show very weak correlations with all popularity metrics, suggesting they are not strong predictors on their own.
+- TV shows have higher average ratings than movies (IMDb: ~6.70 vs ~6.45; TMDB: ~6.96 vs ~6.75).
+- Movies receive more IMDb votes on average (~32,000 vs ~11,000).
+- IMDb votes and TMDB popularity are heavily right-skewed, with a few titles driving the mean upward.
+- Release year and runtime show weak correlations with popularity metrics.
+
 
 ### Modeling Results
 
